@@ -157,34 +157,6 @@ const Hero = () => {
             </motion.a>
           </div>
         </motion.div>
-          <div className="bg-gray-800 rounded-lg h-64 md:h-80 mb-6 flex items-center justify-center border border-gray-600">
-            <div className="text-center">
-              <Play className="w-16 h-16 text-green-400 mx-auto mb-4" />
-              <p className="text-gray-400">Gameplay Trailer Coming Soon</p>
-            </div>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(0, 255, 127, 0.3)' }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-green-500 hover:bg-green-400 text-black font-bold py-3 px-8 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
-            >
-              <span>WISHLIST NOW</span>
-              <ExternalLink className="w-5 h-5" />
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-gray-600 hover:border-red-500 text-white font-bold py-3 px-8 rounded-lg transition-all duration-200 flex items-center justify-center space-x-2"
-            >
-              <Play className="w-5 h-5" />
-              <span>WATCH TRAILER</span>
-            </motion.button>
-          </div>
-        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div

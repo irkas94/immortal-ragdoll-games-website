@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Twitter, Youtube, Download, ExternalLink, Film, Palette, Linkedin } from 'lucide-react';
+import { Twitter, Download, ExternalLink, Film, Palette, Linkedin } from 'lucide-react';
 
 const Contact = () => {
   const socialLinks = [

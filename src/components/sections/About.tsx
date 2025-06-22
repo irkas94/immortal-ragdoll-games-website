@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code, Palette, Zap, Heart, Film, Award, ExternalLink } from 'lucide-react';
+import { Code, Palette, Zap, Film, Award, ExternalLink } from 'lucide-react';
 
 const About = () => {
   const values = [
