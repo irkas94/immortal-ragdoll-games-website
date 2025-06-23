@@ -1,0 +1,42 @@
+{
+  "name": "Immortal Ragdoll Games Website",
+  "version": "2.0.0",
+  "tagline": "We make games that hit like a bat full of nails",
+  "studio": {
+    "name": "Immortal Ragdoll Games",
+    "location": "Texas, USA",
+    "founded": "2024",
+    "focus": "Stylized survival horror experiences",
+    "technology": ["Unreal Engine", "AI-powered workflows", "Hollywood VFX"]
+  },
+  "founder": {
+    "name": "Robert Alomar",
+    "role": "Award-winning VFX Artist & Game Developer",
+    "credits": [
+      "Shang-Chi and the Legend of the Ten Rings (2021)",
+      "Sonic the Hedgehog (2020)", 
+      "Cats (2019)"
+    ],
+    "links": {
+      "imdb": "https://www.imdb.com/name/nm9475138/",
+      "artstation": "https://robertalomar8.artstation.com/",
+      "linkedin": "https://www.linkedin.com/in/robert-alomar-vfx/",
+      "stylizedReel": "https://drive.google.com/file/d/1CngO4NX7bTd-MMGr9OyGhVx7Qlq0Zliu/view",
+      "realtimeReel": "https://drive.google.com/file/d/1yMtiCz6DnOcb-r2A10ook015wUdkp20i/view"
+    }
+  },
+  "currentProject": {
+    "name": "Deadlight Manor",
+    "status": "In Development",
+    "trailer": "https://tr.ee/taI19MRqa9",
+    "description": "Flagship survival horror experience combining Hollywood VFX with AI-powered workflows"
+  },
+  "deployment": {
+    "live": "https://d2jntjhquosg39.cloudfront.net",
+    "aws": {
+      "region": "us-east-1",
+      "s3Bucket": "immortal-ragdoll-games-website",
+      "cloudfrontId": "ETMGPIO632BKT"
+    }
+  }
+}

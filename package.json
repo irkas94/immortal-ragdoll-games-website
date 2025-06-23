@@ -1,0 +1,64 @@
+{
+  "name": "immortal-ragdoll-website",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Official website for Immortal Ragdoll Games - We make games that hit like a bat full of nails",
+  "homepage": "https://d2jntjhquosg39.cloudfront.net",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/immortal-ragdoll-games/website.git"
+  },
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "./tools/scripts/deploy.sh",
+    "backup": "./tools/scripts/backup.sh",
+    "docs": "echo 'Documentation available in ./docs/ directory'",
+    "monitor": "python3 tools/monitoring/ui-feedback-analyzer.py",
+    "fix": "node tools/monitoring/ui-auto-fix.js",
+    "version:patch": "npm version patch && git push && git push --tags",
+    "version:minor": "npm version minor && git push && git push --tags",
+    "version:major": "npm version major && git push && git push --tags"
+  },
+  "dependencies": {
+    "framer-motion": "^12.18.1",
+    "lucide-react": "^0.522.0",
+    "next": "15.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vercel": "^43.3.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "config": {
+    "aws": {
+      "region": "us-east-1",
+      "s3Bucket": "immortal-ragdoll-games-website",
+      "cloudfrontId": "ETMGPIO632BKT"
+    }
+  },
+  "keywords": [
+    "immortal-ragdoll-games",
+    "game-studio",
+    "horror-games",
+    "deadlight-manor",
+    "robert-alomar",
+    "vfx-artist",
+    "ai-workflows",
+    "nextjs",
+    "aws"
+  ],
+  "author": "Immortal Ragdoll Games",
+  "license": "UNLICENSED"
+}
