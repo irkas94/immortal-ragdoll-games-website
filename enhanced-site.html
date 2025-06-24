@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immortal Ragdoll Games</title>
+    <style>
+        /* Enhanced color palette with modern gradients */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(20, 20, 25, 0.95);
+            --accent-red: #ff4757;
+            --accent-gold: #ffa502;
+            --accent-blue: #3742fa;
+            --text-primary: #ffffff;
+            --text-secondary: #a4b0be;
+            --border-glow: rgba(255, 71, 87, 0.3);
+        }
+
+        /* AI: Add modern reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        /* AI: Create a sticky header with logo and navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glow);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px var(--accent-red);
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        /* AI: Design a cinematic hero section with video background capability */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255, 71, 87, 0.1) 0%, rgba(0, 0, 0, 0.8) 70%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--text-primary);
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(255, 71, 87, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .play-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-gold));
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            margin: 2rem 0;
+            box-shadow: 0 0 30px rgba(255, 71, 87, 0.4);
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 71, 87, 0.8), 0 0 100px rgba(255, 165, 2, 0.3);
+        }
+        
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid white;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+        }
+        
+        .trailer-text {
+            display: block;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: var(--vanilla);
+            opacity: 0.8;
+        }
+        
+        /* AI: Style game showcase cards with hover effects */
+        .parallax-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+        
+        .game-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 71, 87, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 71, 87, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .game-card:hover::before {
+            left: 100%;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-red);
+            box-shadow: 0 20px 60px rgba(255, 71, 87, 0.2), 0 0 40px rgba(255, 71, 87, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* AI: Add responsive design for mobile */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            color: var(--text-secondary);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        .content-section {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+        
+        .clip-shape {
+            background: linear-gradient(135deg, var(--bg-card), rgba(58, 71, 255, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(58, 71, 255, 0.2);
+            padding: 3rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(20px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .play-button { width: 80px; height: 80px; }
+            .play-button::before {
+                border-left: 15px solid var(--vanilla);
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+            }
+            .content-section { padding: 2rem 1rem; }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- AI: Create header with logo and smooth navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Immortal Ragdoll Games" style="height: 40px;">
+                <span style="color: var(--text-primary); font-size: 1.5rem; font-weight: 700; margin-left: 10px;">Immortal Ragdoll</span>
+            </div>
+            <div style="display: flex; gap: 2rem;">
+                <a href="#about" style="color: var(--text-primary); text-decoration: none; transition: all 0.3s; font-weight: 500;">About</a>
+                <a href="#games" style="color: var(--text-primary); text-decoration: none; transition: all 0.3s; font-weight: 500;">Games</a>
+                <a href="#contact" style="color: var(--text-primary); text-decoration: none; transition: all 0.3s; font-weight: 500;">Contact</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- AI: Build hero section with animated text and call-to-action -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop>
+            <source src="videos/skyline-background.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Immortal Ragdoll Games</h1>
+            <p>"We Make Games That Hit Like a Bat Full of Nails"</p>
+            <p>From Hollywood VFX Artist Robert Alomar</p>
+            
+            <div class="play-button" onclick="playTrailer()">
+            </div>
+            <span class="trailer-text" style="color: var(--text-secondary);">Watch Deadlight Manor Trailer</span>
+        </div>
+    </section>
+    
+    <!-- AI: Add featured games section with screenshots -->
+    <div class="parallax-container">
+        <div class="parallax-layer" data-speed="0.2" style="background-image: url('videos/skyline-background.mp4');"></div>
+        <div class="parallax-layer" data-speed="0.5" style="background: linear-gradient(45deg, rgba(55, 82, 79, 0.3), rgba(52, 68, 76, 0.3));"></div>
+    </div>
+    
+    <section class="content-section" id="about">
+        <div class="container">
+            <h2 style="color: var(--text-primary); font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 3rem; background: linear-gradient(135deg, var(--accent-red), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">About Immortal Ragdoll</h2>
+            
+            <div class="clip-shape" style="margin-bottom: 3rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <div>
+                        <h3 style="color: var(--accent-gold); font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem;">From Hollywood to Horror</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1rem;">Award-winning VFX artist turned indie game developer, bringing Hollywood expertise to stylized survival horror experiences.</p>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Texas-based studio crafting emotional, character-driven games using Unreal Engine and cutting-edge AI workflows.</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 300px; height: 200px; background: linear-gradient(135deg, var(--accent-red), var(--accent-blue)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: 600; margin: 0 auto; box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);">Robert Alomar<br>Studio Founder</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div class="game-card">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; font-weight: 600;">🎬 Hollywood Credits</h4>
+                    <ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+                        <li>• Shang-Chi and the Legend of the Ten Rings</li>
+                        <li>• Sonic the Hedgehog</li>
+                        <li>• Cats</li>
+                    </ul>
+                </div>
+                <div class="game-card">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; font-weight: 600;">🏢 Studio Values</h4>
+                    <ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+                        <li>• Style > Realism</li>
+                        <li>• Bold Storytelling</li>
+                        <li>• Indie Grit</li>
+                        <li>• Chaos & Beauty</li>
+                    </ul>
+                </div>
+                <div class="game-card">
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem; font-weight: 600;">🤖 Technology</h4>
+                    <ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+                        <li>• Unreal Engine</li>
+                        <li>• AI-Powered Workflows</li>
+                        <li>• Hollywood VFX Standards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section" id="games">
+        <div class="container">
+            <h2 style="color: var(--text-primary); font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 3rem; background: linear-gradient(135deg, var(--accent-red), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Games Portfolio</h2>
+            
+            <div class="game-card" style="margin-bottom: 3rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                    <div>
+                        <h3 style="color: var(--accent-red); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">🏚️ Deadlight Manor</h3>
+                        <p style="color: var(--accent-gold); font-size: 1.1rem; font-weight: 500; margin-bottom: 1rem;"><strong>Status:</strong> In Development (2026)</p>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">Our flagship survival horror experience featuring stylized, emotional, character-driven gameplay. Built with Unreal Engine and AI-powered workflows, showcasing the intersection of Hollywood VFX artistry and indie game development.</p>
+                        
+                        <div style="margin-bottom: 2rem;">
+                            <h4 style="color: var(--accent-gold); margin-bottom: 1rem; font-weight: 600;">Key Features:</h4>
+                            <ul style="color: var(--text-secondary); list-style: none; padding: 0;">
+                                <li>• Stylized survival horror gameplay</li>
+                                <li>• Character-driven narrative</li>
+                                <li>• Hollywood-quality VFX</li>
+                                <li>• AI-enhanced development</li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <a href="https://tr.ee/taI19MRqa9" target="_blank" style="background: linear-gradient(135deg, var(--accent-red), var(--accent-gold)); color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; margin-right: 1rem; display: inline-block; transition: all 0.3s; font-weight: 500; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);">🎬 Watch Trailer</a>
+                            <a href="https://drive.google.com/file/d/1CngO4NX7bTd-MMGr9OyGhVx7Qlq0Zliu/view" target="_blank" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-red)); color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; display: inline-block; transition: all 0.3s; font-weight: 500; box-shadow: 0 4px 15px rgba(58, 71, 255, 0.3);">🎨 VFX Reel</a>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 400px; height: 250px; background: linear-gradient(135deg, var(--accent-red), var(--accent-blue)); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600; margin: 0 auto; border: 2px solid rgba(255, 71, 87, 0.3); box-shadow: 0 10px 30px rgba(255, 71, 87, 0.2);">Deadlight Manor<br>Screenshots</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-card">
+                <div style="text-align: center; padding: 2rem;">
+                    <h3 style="color: var(--burnt-umber); font-size: 2rem; margin-bottom: 1rem;">🚀 Project Neon</h3>
+                    <p style="color: var(--vanilla); opacity: 0.7; font-size: 1.1rem; margin-bottom: 1rem;"><strong>Status:</strong> Pre-Production (TBA)</p>
+                    <p style="color: var(--vanilla); opacity: 0.9; line-height: 1.6;">Next-generation survival horror experience pushing the boundaries of stylized realism and AI-powered storytelling.</p>
+                    <div style="margin-top: 2rem;">
+                        <span style="background: var(--outer-space); color: var(--vanilla); padding: 8px 16px; border-radius: 15px; font-size: 0.9rem;">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- AI: Create contact section with press kit and social links -->
+    <section class="content-section" id="contact">
+        <div class="container">
+            <h2 style="color: var(--text-primary); font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 3rem; background: linear-gradient(135deg, var(--accent-red), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Press & Contact</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div class="game-card">
+                    <h4 style="color: var(--burnt-umber); margin-bottom: 1rem;">🎨 Professional Portfolio</h4>
+                    <p style="color: var(--vanilla); opacity: 0.9; margin-bottom: 1rem;">View Robert's award-winning VFX work and game development portfolio.</p>
+                    <a href="https://robertalomar8.artstation.com/" target="_blank" style="color: var(--burnt-umber); text-decoration: none; font-weight: bold;">→ ArtStation Portfolio</a>
+                </div>
+                
+                <div class="game-card">
+                    <h4 style="color: var(--burnt-umber); margin-bottom: 1rem;">🎬 Hollywood Credits</h4>
+                    <p style="color: var(--vanilla); opacity: 0.9; margin-bottom: 1rem;">Complete filmography and industry recognition.</p>
+                    <a href="https://www.imdb.com/name/nm9475138/" target="_blank" style="color: var(--burnt-umber); text-decoration: none; font-weight: bold;">→ IMDB Profile</a>
+                </div>
+                
+                <div class="game-card">
+                    <h4 style="color: var(--burnt-umber); margin-bottom: 1rem;">💼 Business Network</h4>
+                    <p style="color: var(--vanilla); opacity: 0.9; margin-bottom: 1rem;">Connect for partnerships and collaborations.</p>
+                    <a href="https://www.linkedin.com/in/robert-alomar-vfx/" target="_blank" style="color: var(--burnt-umber); text-decoration: none; font-weight: bold;">→ LinkedIn Profile</a>
+                </div>
+            </div>
+            
+            <div class="clip-shape" style="text-align: center;">
+                <h3 style="color: var(--burnt-umber); font-size: 1.8rem; margin-bottom: 2rem;">Press Kit & Media</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div>
+                        <h5 style="color: var(--vanilla); margin-bottom: 0.5rem;">Studio Assets</h5>
+                        <p style="color: var(--vanilla); opacity: 0.7; font-size: 0.9rem;">Logos, photos, bios</p>
+                    </div>
+                    <div>
+                        <h5 style="color: var(--vanilla); margin-bottom: 0.5rem;">Game Media</h5>
+                        <p style="color: var(--vanilla); opacity: 0.7; font-size: 0.9rem;">Screenshots, trailers</p>
+                    </div>
+                    <div>
+                        <h5 style="color: var(--vanilla); margin-bottom: 0.5rem;">VFX Reels</h5>
+                        <p style="color: var(--vanilla); opacity: 0.7; font-size: 0.9rem;">Professional work samples</p>
+                    </div>
+                </div>
+                <p style="color: var(--vanilla); opacity: 0.9; margin-bottom: 2rem;">For press inquiries, interviews, and collaboration opportunities, please reach out through our professional channels above.</p>
+                <div style="background: var(--burnt-umber); color: var(--vanilla); padding: 1rem; border-radius: 10px; display: inline-block;">
+                    <strong>"We make games that hit like a bat full of nails"</strong><br>
+                    <span style="opacity: 0.8;">- Immortal Ragdoll Games</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer style="background: var(--bg-dark); color: var(--text-primary); text-align: center; padding: 2rem 0; margin-top: 4rem; border-top: 1px solid var(--border-glow);">
+        <div class="container">
+            <p>&copy; 2025 Immortal Ragdoll Games. All rights reserved.</p>
+            <p style="opacity: 0.7; margin-top: 0.5rem;">"We make games that hit like a bat full of nails"</p>
+        </div>
+    </footer>
+    
+    <!-- AI: Add smooth scrolling JavaScript -->
+    <div class="scroll-indicator">
+        <div style="text-align: center;">
+            <div style="font-size: 2rem;">↓</div>
+            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Scroll</div>
+        </div>
+    </div>
+    
+    <script>
+        // Parallax scrolling effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxLayers = document.querySelectorAll('.parallax-layer');
+            
+            parallaxLayers.forEach(layer => {
+                const speed = layer.dataset.speed;
+                const yPos = -(scrolled * speed);
+                layer.style.transform = `translateY(${yPos}px)`;
+            });
+            
+            // Hide scroll indicator after scrolling
+            const indicator = document.querySelector('.scroll-indicator');
+            if (scrolled > 100) {
+                indicator.style.opacity = '0';
+            } else {
+                indicator.style.opacity = '1';
+            }
+        });
+        
+        // Enhanced play trailer function
+        function playTrailer() {
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(14, 15, 14, 0.95);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                backdrop-filter: blur(10px);
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://tr.ee/taI19MRqa9';
+            iframe.style.cssText = `
+                width: 90%;
+                height: 80%;
+                max-width: 1200px;
+                border: 3px solid #972f24;
+                border-radius: 10px;
+                box-shadow: 0 20px 40px rgba(151, 47, 36, 0.5);
+            `;
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '✕';
+            closeBtn.style.cssText = `
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+                background: #972f24;
+                color: #d4c6af;
+                border: none;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: all 0.3s;
+            `;
+            
+            closeBtn.onclick = () => document.body.removeChild(modal);
+            modal.onclick = (e) => {
+                if (e.target === modal) document.body.removeChild(modal);
+            };
+            
+            modal.appendChild(iframe);
+            modal.appendChild(closeBtn);
+            document.body.appendChild(modal);
+            
+            // Add fade in animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: scale(0.9); }
+                    to { opacity: 1; transform: scale(1); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+    
+</body>
+</html>
